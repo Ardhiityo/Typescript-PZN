@@ -1,0 +1,27 @@
+{
+  "name": "typescript-dasar",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "author": "Arya",
+  "license": "ISC",
+  "type": "module",
+  "scripts": {
+    "test": "jest"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.[t|j]sx?$": "babel-jest"
+    }
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.29.2",
+    "@babel/preset-typescript": "^7.28.5",
+    "@jest/globals": "^30.3.0",
+    "@types/jest": "^30.0.0",
+    "babel-jest": "^30.3.0",
+    "jest": "^30.3.0",
+    "ts-jest": "^29.4.7",
+    "typescript": "^6.0.2"
+  }
+}
