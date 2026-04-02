@@ -16,5 +16,9 @@ describe("Array", function() {
         // Array Readonly cara 2
         const numbers: readonly number[] = [1, 2, 3, 4, 5];
         console.log(numbers);
+        
+        // Tuple
+        const person: readonly [string, number, boolean] = ["John", 30, true];
+        console.log(person);
     });
 })
