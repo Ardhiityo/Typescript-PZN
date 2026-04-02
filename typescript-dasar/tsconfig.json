@@ -1,8 +1,13 @@
 {
+  // include file yang ingin di kompilasi
+  "include": ["src/**/*"],
+  // exclude file yang tidak ingin di kompilasi
+  "exclude": ["tests/**/*"],
+  
   // Visit https://aka.ms/tsconfig to read more about this file
   "compilerOptions": {
     // File Layout
-    // "rootDir": "./src",
+    "rootDir": "./src",
     "outDir": "./dist",
 
     // Environment Settings
@@ -16,9 +21,9 @@
     // and npm install -D @types/node
 
     // Other Outputs
-    "sourceMap": true,
-    "declaration": true,
-    "declarationMap": true,
+    //"sourceMap": false,
+    //"declaration": true,
+    //"declarationMap": false,
 
     // Stricter Typechecking Options
     "noUncheckedIndexedAccess": true,
