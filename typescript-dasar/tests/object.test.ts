@@ -1,6 +1,6 @@
 describe('Object', () => {
     it('should be able to use object', () => {
-        const person: { name: string, age: number } = {
+        const person: { name: string, age: number, hobbiess?:string[] } = {
             name: "John",
             age: 30
         }
