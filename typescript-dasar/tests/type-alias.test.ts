@@ -8,7 +8,7 @@ describe("Type Alias", () => {
         } 
 
         const product:Product = {
-            id: 1,
+            id: "1",
             name: "Product 1",
             category: category
         } 

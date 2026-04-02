@@ -1,10 +1,12 @@
+export type ID = String | Number;
+
 export type Category = {
-    id : Number;
+    id : ID;
     name : String;
 };
 
 export type Product = {
-    id : Number;
+    id : ID;
     name : String;
     category: Category
 };
