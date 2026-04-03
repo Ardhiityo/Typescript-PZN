@@ -37,4 +37,18 @@ describe('Function', () => {
         expect(sayHello("John", 25)).toBe("Hello John, age: 25");
         expect(sayHello("John")).toBe("Hello John, age: undefined");
     });
+
+    it('should be able to create function overloading', () => {
+        function callMe(value:string):string;
+        function callMe(value:number):number;
+        function callMe(value:any):any{
+            if(typeof value === "string"){
+                return `Hello ${value}`;
+            }
+            return value * 2;
+        }
+
+        expect(callMe(10)).toBe(20);
+        expect(callMe("John")).toBe("Hello John");
+    });
 });
