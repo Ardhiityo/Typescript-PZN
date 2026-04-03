@@ -51,4 +51,12 @@ describe('Function', () => {
         expect(callMe(10)).toBe(20);
         expect(callMe("John")).toBe("Hello John");
     });
+    
+    it('should be able to create function with function parameter', () => {
+        function sayHello(name:string, filter:(name:string)=>string):string{
+            return filter(name);
+        }
+
+        expect(sayHello("John", (name) => name.toUpperCase())).toBe("JOHN");
+    });
 });
