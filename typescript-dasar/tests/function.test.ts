@@ -57,6 +57,17 @@ describe('Function', () => {
             return filter(name);
         }
 
+        function toUpper(name:string):string{
+            return name.toUpperCase();
+        }        
+        expect(sayHello("John", toUpper)).toBe("JOHN");
+        
+        // Arrow function
         expect(sayHello("John", (name) => name.toUpperCase())).toBe("JOHN");
+        
+        // Anonymous function
+        expect(sayHello("John", function(name:string):string{
+            return name.toLowerCase();
+        })).toBe("john");
     });
 });
