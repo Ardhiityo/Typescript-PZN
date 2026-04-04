@@ -26,4 +26,32 @@ describe('Polymorphism', () => {
         expect(sayHello(new Animal('Animal'))).toBe('Hello Animal');
         expect(sayHello(new Dog('Dog'))).toBe('Hello Dog');
     });
+    
+    it('should demonstrate polymorphism typecast', () => {
+        class Animal {
+            constructor(public name:string){}
+        }
+
+        class Dog extends Animal {}
+        
+        class BullDog extends Dog {}
+
+        function sayHello(animal: Animal) {
+            //pengecekan harus dari level child paling bawah ke atas (parent)
+            if(animal instanceof BullDog){
+                const bullDog = animal as BullDog;
+                return `Hello ${bullDog.name} from Bulldog`;
+            }else if(animal instanceof Dog){
+                const dog = animal as Dog;
+                return `Hello ${dog.name} from Dog`;
+            }else{
+                const _animal = animal as Animal;
+                return `Hello ${_animal.name} from Animal`;
+            }
+        }
+
+        expect(sayHello(new BullDog('BullDog'))).toBe('Hello BullDog from Bulldog');
+        expect(sayHello(new Dog('Dog'))).toBe('Hello Dog from Dog');
+        expect(sayHello(new Animal('Animal'))).toBe('Hello Animal from Animal');
+    });
 })
