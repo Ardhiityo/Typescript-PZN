@@ -23,3 +23,31 @@ test('Should support primitive type validation', () => {
     ]
      */
 });
+test('Should support primitive conversion', () => {
+    const usernameSchema = z.coerce.string().min(3).max(100);
+    const isAdminSchema = z.coerce.boolean();
+    const priceSchema = z.coerce.number().positive().lte(1000000);
+    //otomatis dikonversi menjadi string
+    const username = usernameSchema.parse(123);
+    //otomatis dikonversi menjadi boolean
+    const isAdmin = isAdminSchema.parse('true');
+    //otomatis dikonversi menjadi number
+    const price = priceSchema.parse('10');
+    expect(username).toBe('123');
+    expect(isAdmin).toBe(true);
+    expect(price).toBe(10);
+});
+test('Should support primitive without conversion', () => {
+    const usernameSchema = z.string().min(3).max(100);
+    const isAdminSchema = z.boolean();
+    const priceSchema = z.number().positive().lte(1000000);
+    //tidak otomatis dikonversi menjadi string
+    //error
+    const username = usernameSchema.parse(123);
+    //tidak otomatis dikonversi menjadi boolean
+    //error
+    const isAdmin = isAdminSchema.parse('true');
+    //tidak otomatis dikonversi menjadi number
+    //errorr
+    const price = priceSchema.parse('10');
+});
