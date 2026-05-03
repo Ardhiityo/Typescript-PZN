@@ -1,4 +1,4 @@
-import z, { ZodError } from "zod";
+import z, { ZodError, RefinementCtx } from "zod";
 test('Should support primitive type validation', () => {
     const usernameSchema = z.string().min(3).max(100);
     const isAdminSchema = z.boolean();
@@ -194,6 +194,31 @@ test('Should support transform validation', () => {
     });
     const request = {
         firstname: 'eko'
+    };
+    const register = registerSchema.parse(request);
+    expect(register).toEqual({
+        firstname: 'EKO',
+    });
+});
+test('Should support custom validation', () => {
+    function mustUpperCase(value, ctx) {
+        if (value != value.toUpperCase()) {
+            ctx.addIssue({
+                code: 'custom',
+                message: "The username field must uppercase",
+                input: value,
+            });
+            return z.NEVER;
+        }
+        else {
+            return value;
+        }
+    }
+    const registerSchema = z.object({
+        firstname: z.string().min(3).max(100).transform(mustUpperCase)
+    });
+    const request = {
+        firstname: 'EKO'
     };
     const register = registerSchema.parse(request);
     expect(register).toEqual({
