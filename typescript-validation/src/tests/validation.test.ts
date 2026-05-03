@@ -1,4 +1,4 @@
-import z, { ZodError, RefinementCtx } from "zod";
+import z, { ZodError, type RefinementCtx } from "zod";
 
 test('Should support primitive type validation', () => {
   const usernameSchema = z.string().min(3).max(100);
