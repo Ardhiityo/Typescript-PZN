@@ -173,3 +173,16 @@ test('Should support custom validation message', () => {
         }
     }
 });
+test('Should support optional validation', () => {
+    const registerSchema = z.object({
+        firstname: z.string().min(3).max(100),
+        lastname: z.string().min(3).max(100).optional()
+    });
+    const request = {
+        firstname: 'eko'
+    };
+    const register = registerSchema.parse(request);
+    expect(register).toEqual({
+        firstname: 'eko',
+    });
+});

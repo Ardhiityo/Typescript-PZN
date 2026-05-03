@@ -216,10 +216,27 @@ test('Should support custom validation message', () => {
     loginSchema.parse(request);
   } catch (error) {
     if (error instanceof ZodError) {
-     error.issues.forEach(value => {
+      error.issues.forEach(value => {
         // Gunakan String() untuk membungkus path agar aman dari tipe 'symbol'
         console.log(`${String(value.path[0])} : ${value.message}`);
-     });
+      });
     }
   }
+})
+
+test('Should support optional validation', () => {
+  const registerSchema = z.object({
+    firstname: z.string().min(3).max(100),
+    lastname: z.string().min(3).max(100).optional()
+  })
+
+  const request = {
+    firstname: 'eko'
+  }
+
+  const register = registerSchema.parse(request);
+
+  expect(register).toEqual({
+    firstname: 'eko',
+  })
 })
