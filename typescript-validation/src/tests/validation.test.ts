@@ -153,3 +153,50 @@ test('Should support validation nested object', () => {
     }
   })
 })
+
+test('Should support array validation', () => {
+  const hobbiesShema = z.array(
+    z.string().min(3).max(100)
+  ).min(2).max(3)
+
+  const hobbies: Array<string> = hobbiesShema.parse(
+    ['Coding', 'Reading', 'Swimming']
+  );
+
+  expect(hobbies).toEqual(['Coding', 'Reading', 'Swimming']);
+})
+
+test('Should support set validation', () => {
+  const hobbiesShema = z.set(
+    z.string().min(3).max(100)
+  ).min(2).max(3)
+
+  //set hanya menerima data unique
+  const hobbies: Set<string> = hobbiesShema.parse(
+    new Set(['Coding', 'Reading', 'Swimming', 'Coding', 'Reading', 'Swimming'])
+  );
+
+  expect(hobbies).toEqual(new Set(['Coding', 'Reading', 'Swimming']));
+})
+
+test('Should support map validation', () => {
+  const hobbiesShema = z.map(
+    z.string().min(3).max(100), z.string().min(3).max(100)
+  ).min(2).max(3)
+
+  const hobbies: Map<string, string> = hobbiesShema.parse(
+    new Map([
+      ['name', 'eko'],
+      ['name', 'budi'],
+      ['hobby', 'coding'],
+      ['hobby', 'reading'],
+    ])
+  );
+
+  expect(hobbies).toEqual(new Map([
+    ['name', 'eko'],
+    ['name', 'budi'],
+    ['hobby', 'coding'],
+    ['hobby', 'reading'],
+  ]));
+})
