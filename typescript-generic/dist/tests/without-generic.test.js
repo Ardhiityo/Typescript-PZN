@@ -6,8 +6,10 @@ test('Should support without generic', () => {
         }
     }
     let person = new Person('Eko');
+    //tidak aman, karena tipe data berubah-ubah
     person.name = 'Eko';
     person.name = true;
+    person.name = 10;
     console.log(person);
 });
 export {};
