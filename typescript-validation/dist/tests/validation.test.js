@@ -51,3 +51,12 @@ test('Should support primitive without conversion', () => {
     //errorr
     const price = priceSchema.parse('10');
 });
+test('Should support date validation', () => {
+    const birthdaySchema = z.coerce.date()
+        .min(new Date('1990-01-01'))
+        .max(new Date('2020-01-01'));
+    const birthday = birthdaySchema.parse('2020-01-01');
+    expect(birthday).toEqual(new Date('2020-01-01'));
+    const birthday2 = birthdaySchema.parse(new Date('1990-01-01'));
+    expect(birthday2).toEqual(new Date('1990-01-01'));
+});
