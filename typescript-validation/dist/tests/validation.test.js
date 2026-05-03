@@ -186,3 +186,17 @@ test('Should support optional validation', () => {
         firstname: 'eko',
     });
 });
+test('Should support transform validation', () => {
+    //setelah berhasil divalidasi, transform akan dijalankan
+    //firstname akan di transform bila sukses divalidasi
+    const registerSchema = z.object({
+        firstname: z.string().min(3).max(100).transform(value => value.toUpperCase())
+    });
+    const request = {
+        firstname: 'eko'
+    };
+    const register = registerSchema.parse(request);
+    expect(register).toEqual({
+        firstname: 'EKO',
+    });
+});
