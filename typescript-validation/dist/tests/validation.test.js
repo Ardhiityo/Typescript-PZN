@@ -80,3 +80,49 @@ test('Should support validation error without throw error', () => {
         console.log(name.error.issues[0]?.message);
     }
 });
+test('Should support validation object', () => {
+    const loginSchema = z.object({
+        username: z.string().min(3).max(100),
+        password: z.string().min(3).max(100)
+    });
+    //data yang tidak diperlukan tidak akan diambil
+    const request = {
+        username: 'eko',
+        password: 'rahasia',
+        sample: 'sample'
+    };
+    const login = loginSchema.parse(request);
+    expect(login).toEqual({
+        username: 'eko',
+        password: 'rahasia',
+    });
+});
+test('Should support validation nested object', () => {
+    const loginSchema = z.object({
+        username: z.string().min(3).max(100),
+        password: z.string().min(3).max(100),
+        address: z.object({
+            street: z.string().min(3).max(100),
+            country: z.string().min(3).max(100)
+        })
+    });
+    //data yang tidak diperlukan tidak akan diambil
+    const request = {
+        username: 'eko',
+        password: 'rahasia',
+        sample: 'sample',
+        address: {
+            street: 'Jalan belum ada',
+            country: 'Indonesia'
+        }
+    };
+    const login = loginSchema.parse(request);
+    expect(login).toEqual({
+        username: 'eko',
+        password: 'rahasia',
+        address: {
+            street: 'Jalan belum ada',
+            country: 'Indonesia'
+        }
+    });
+});
