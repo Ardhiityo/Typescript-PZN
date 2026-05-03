@@ -1,0 +1,27 @@
+{
+  "name": "typescript-generic",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "jest"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.[t|j]sx?$": "babel-jest"
+    }
+  },
+  "author": "Arya",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.29.0",
+    "@babel/preset-env": "^7.29.3",
+    "@babel/preset-typescript": "^7.28.5",
+    "@jest/globals": "^30.3.0",
+    "@types/jest": "^30.0.0",
+    "babel-jest": "^30.3.0",
+    "jest": "^30.3.0",
+    "ts-jest": "^29.4.9"
+  }
+}
