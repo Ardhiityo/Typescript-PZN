@@ -152,3 +152,24 @@ test('Should support map validation', () => {
         ['hobby', 'reading'],
     ]));
 });
+test('Should support custom validation message', () => {
+    const loginSchema = z.object({
+        username: z.string('Tipe data harus string').min(3, 'Minimal 3 karakter').max(100, 'Maksimal 100 karakter'),
+        password: z.string('Tipe data harus string').min(3, 'Minimal 3 karakter').max(100, 'Maksimal 100 karakter')
+    });
+    const request = {
+        username: 'ek',
+        password: 'r',
+    };
+    try {
+        loginSchema.parse(request);
+    }
+    catch (error) {
+        if (error instanceof ZodError) {
+            error.issues.forEach(value => {
+                // Gunakan String() untuk membungkus path agar aman dari tipe 'symbol'
+                console.log(`${String(value.path[0])} : ${value.message}`);
+            });
+        }
+    }
+});
