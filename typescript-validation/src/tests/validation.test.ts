@@ -1,4 +1,4 @@
-import z from "zod";
+import z, { ZodError } from "zod";
 
 test('Should support primitive type validation', () => {
   const usernameSchema = z.string().min(3).max(100);
@@ -72,7 +72,30 @@ test('Should support date validation', () => {
 
   const birthday = birthdaySchema.parse('2020-01-01');
   expect(birthday).toEqual(new Date('2020-01-01'));
-  
+
   const birthday2 = birthdaySchema.parse(new Date('1990-01-01'));
   expect(birthday2).toEqual(new Date('1990-01-01'));
+})
+
+test('Should support validation error throw error', () => {
+  const nameSchema = z.string().min(3).max(100);
+
+  try {
+    nameSchema.parse('ek');
+  } catch (error) {
+    if (error instanceof ZodError)
+      console.log(error.issues[0]?.message);
+  }
+})
+
+test('Should support validation error without throw error', () => {
+  const nameSchema = z.string().min(3).max(100);
+
+  const name = nameSchema.safeParse('ek');
+
+  if (name.success) {
+    console.log(name.data);
+  } else {
+    console.log(name.error.issues[0]?.message);
+  }
 })
